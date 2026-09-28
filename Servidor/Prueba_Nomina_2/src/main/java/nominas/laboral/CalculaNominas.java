@@ -1,6 +1,8 @@
 package nominas.laboral;
 
-import java.sql.SQLOutput;
+import nominas.laboral.conexionDB.ConexionDB;
+
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -8,6 +10,10 @@ public class CalculaNominas {
     public static void main(String[] args) {
 
         try {
+
+            Connection conexion = ConexionDB.conectar();
+            System.out.println("Conexión realizada correctamente");
+            conexion.close();
             /*Empleado e = new Empleado("James Cosling", "32000032G", 'M', 4, 7);
 
             Empleado e2 = new Empleado("Ada Lovelace", "32000031R", 'F');
@@ -36,9 +42,11 @@ public class CalculaNominas {
                 }
 
                 System.out.println(empleado);
-
-
             }
+
+            EmpleadoDAO dao = new EmpleadoDAO();
+            dao.insertarEmpleado(empleados.get(0));
+
             Scanner sc = new Scanner(System.in);
             int opcion;
             do {
@@ -85,15 +93,74 @@ public class CalculaNominas {
                         break;
 
                     case 3:
-                        int respuesta;
-                        System.out.println("=========SUBMENU==========");
-                        System.out.println("0. Salir");
-                        System.out.println("1. Modificar nombre");
-                        System.out.println("2. Modificar DNI");
-                        System.out.println("3. Modificar sexo");
-                        System.out.println("4. Modificar categoria");
-                        System.out.println("5. Modificar años trabajados");
-                        respuesta = sc.nextInt()
+                        System.out.print("Dni del empleado que desea modificar: ");
+                        String dniModificar = sc.nextLine();
+
+                        Empleado empleadoEncontrado = null;
+
+                        for (Empleado empleado : empleados) {
+                            if (empleado.dni.equals(dniModificar)) {
+                                empleadoEncontrado = empleado;
+                                break;
+                            }
+                        }
+
+                        if (empleadoEncontrado == null) {
+                            System.out.println("Empleado no encontrado");
+                            break;
+                        }
+
+                        int opcionModificar;
+
+                        do {
+                            System.out.println("===== MODIFICAR EMPLEADO =====");
+                            System.out.println("1. Modificar nombre");
+                            System.out.println("2. Modificar DNI");
+                            System.out.println("3. Modificar sexo");
+                            System.out.println("4. Modificar categoría");
+                            System.out.println("5. Modificar años trabajados");
+                            System.out.println("0. Volver");
+                            System.out.println("==============================");
+                            System.out.print("Selecciona una opción: ");
+
+                            opcionModificar = sc.nextInt();
+                            sc.nextLine();
+
+                            switch (opcionModificar) {
+
+                                case 1:
+                                    System.out.println("Introduzca nuevo nombre: ");
+                                    break;
+
+                                case 2:
+                                    System.out.println("Modificar DNI");
+                                    break;
+
+                                case 3:
+                                    System.out.println("Modificar sexo");
+                                    break;
+
+                                case 4:
+                                    System.out.println("Introduzca nueva categoria: ");
+                                    int cambioCategoria = sc.nextInt();
+                                    sc.nextLine();
+                                    empleadoEncontrado.setCategoria(cambioCategoria);
+                                    break;
+
+                                case 5:
+                                    System.out.println("Modificar años trabajados");
+                                    break;
+
+                                case 0:
+                                    System.out.println("Volviendo al menú principal...");
+                                    break;
+
+                                default:
+                                    System.out.println("Opción no válida");
+                            }
+
+                        } while (opcionModificar != 0);
+
                         break;
 
                     case 4:
