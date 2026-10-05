@@ -1,8 +1,6 @@
 package nominas.laboral;
 
-import nominas.laboral.conexionDB.ConexionDB;
 
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,28 +9,11 @@ public class CalculaNominas {
 
         try {
 
-            Connection conexion = ConexionDB.conectar();
-            System.out.println("Conexión realizada correctamente");
-            conexion.close();
+
+            EmpleadoDAO dao = new EmpleadoDAO();
 
             LeerTxt l = new LeerTxt();
             ArrayList<Empleado> empleados = l.leer();
-
-            for (Empleado empleado : empleados) {
-
-                System.out.println(empleado);
-                if (empleado.dni.equals("32000032G")) {
-                    empleado.setCategoria(9);
-                }
-
-                if (empleado.dni.equals("32000031R")) {
-                    empleado.incrAnyo();
-                }
-
-                System.out.println(empleado);
-            }
-
-            EmpleadoDAO dao = new EmpleadoDAO();
 
             for (Empleado empleado : empleados) {
                 dao.insertarEmpleado(empleado);
@@ -68,7 +49,7 @@ public class CalculaNominas {
                         break;
 
                     case 3:
-                        modificarEmpleado(sc, dao, empleados);
+                        modificarEmpleado(sc, dao);
                         break;
 
                     case 4:
@@ -119,19 +100,12 @@ public class CalculaNominas {
         }
     }
 
-        private static void modificarEmpleado(Scanner sc, EmpleadoDAO dao, ArrayList<Empleado> empleados) throws Exception {
+    private static void modificarEmpleado(Scanner sc, EmpleadoDAO dao) throws Exception {
 
         System.out.print("Dni del empleado que desea modificar: ");
         String dni = sc.nextLine();
 
-        Empleado empleadoEncontrado = null;
-
-        for (Empleado empleado : empleados) {
-            if (empleado.dni.equals(dni)) {
-                empleadoEncontrado = empleado;
-                break;
-            }
-        }
+        Empleado empleadoEncontrado = dao.obtenerEmpleadoPorDni(dni);
 
         if (empleadoEncontrado == null) {
             System.out.println("Empleado no encontrado");
