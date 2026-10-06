@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class EmpleadoDAO {
 
-    public void insertarEmpleado(Empleado empleado) throws SQLException {
+    public void altaEmpleado(Empleado empleado) throws SQLException {
 
         String sql = "INSERT INTO Empleados (dni, nombre, sexo, categoria, anyos_trabajados) " +
                 "VALUES (?, ?, ?, ?, ?)";

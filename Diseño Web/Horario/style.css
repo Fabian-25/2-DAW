@@ -1,0 +1,34 @@
+        body{
+            font-family: Arial, sans-serif;
+            background-image: url("./Images/hallowen_1920x1080.jpg");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        table{
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+        }
+
+        th{
+            background-color: black;
+            color: white;
+        }
+
+        td{
+            border: 1px solid grey;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .hora{
+            background-color: rgb(189, 189, 189);
+            font-weight: bold;
+        }
+
+        .recreo{
+            background-color: rgb(189, 189, 189);
+            font-weight: bold;
+        }

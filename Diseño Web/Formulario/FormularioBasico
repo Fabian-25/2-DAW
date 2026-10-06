@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+
+    <body>
+
+        <h1>FORMULARIOS</h1>
+
+        <form action="https://jkorpela.fi/cgi-bin/echo.cgi" target="_blank"
+            method="post">
+
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre"><br><br>
+
+            <label for="apellidos">Apellidos:</label>
+            <input type="text" name="apellidos" id="apellidos"><br><br>
+
+            <label for="gmail">Correo electronico:</label>
+            <input type="email" id="correo" pattern="+@+" placeholder="ejemplo@gmail.com" required name="Correo"><br><br>
+
+            <label for="phone">Numero telefono</label>
+            <input type="tel" pattern="[0-9]{9}" placeholder="123456789" required name="telefono" id="telefono" ><br><br>
+
+            <label for="dni">DNI:</label>
+            <input type="text" id="dni" name="dni" pattern="[0-9]{8}[A-Z]" required><br><br>
+
+            <p>Marca los lenguajes que sepas:</p>
+
+            <input type="checkbox" id="html" name="html" value="html">
+            <label for="html">HTML</label><br>
+
+            <input type="checkbox" id="java" name="java" value="java">
+            <label for="java">Java</label><br>
+
+            <input type="checkbox" id="sql" name="sql" value="sql">
+            <label for="sql">SQL</label>
+
+            <p>Elige solamente la que más te guste:</p>
+
+            <input type="radio" id="html-fav" name="fav_language" value="HTML">
+            <label for="html-fav">HTML</label><br>
+
+            <input type="radio" id="css" name="fav_language" value="CSS">
+            <label for="css">CSS</label><br>
+
+            <input type="radio" id="javascript" name="fav_language"
+                value="JavaScript">
+            <label for="javascript">JavaScript</label>
+
+            <p>
+                <input type="submit" value="Enviar">
+                <input type="reset" value="Borrar">
+            </p>
+
+        </form>
+
+    </body>
+
+</html>

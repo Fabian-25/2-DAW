@@ -45,7 +45,7 @@ public class CalculaNominas {
             }
 
             EmpleadoDAO dao = new EmpleadoDAO();
-            dao.insertarEmpleado(empleados.get(0));
+            dao.altaEmpleado(empleados.get(0));
 
             Scanner sc = new Scanner(System.in);
             int opcion;
