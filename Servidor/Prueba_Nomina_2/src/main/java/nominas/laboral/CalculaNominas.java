@@ -1,8 +1,6 @@
 package nominas.laboral;
 
-import nominas.laboral.conexionDB.ConexionDB;
 
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,42 +9,23 @@ public class CalculaNominas {
 
         try {
 
-            Connection conexion = ConexionDB.conectar();
-            System.out.println("Conexión realizada correctamente");
-            conexion.close();
-            /*Empleado e = new Empleado("James Cosling", "32000032G", 'M', 4, 7);
 
-            Empleado e2 = new Empleado("Ada Lovelace", "32000031R", 'F');
-
-            System.out.println("Se escribe los empleados");
-            escribe(e, e2);
-
-            e2.incrAnyo();
-            e.setCategoria(9);
-
-            System.out.println("Se modifican los empleados");
-            escribe(e, e2);*/
+            EmpleadoDAO dao = new EmpleadoDAO();
 
             LeerTxt l = new LeerTxt();
             ArrayList<Empleado> empleados = l.leer();
 
             for (Empleado empleado : empleados) {
-
-                System.out.println(empleado);
-                if (empleado.dni.equals("32000032G")) {
-                    empleado.setCategoria(9);
-                }
-
-                if (empleado.dni.equals("32000031R")) {
-                    empleado.incrAnyo();
-                }
-
-                System.out.println(empleado);
+                dao.insertarEmpleado(empleado);
+                dao.insertarNomina(empleado);
             }
 
+<<<<<<< HEAD
             EmpleadoDAO dao = new EmpleadoDAO();
             dao.altaEmpleado(empleados.get(0));
 
+=======
+>>>>>>> 659233cff8894ecc2573f9a909e0c6c28ddc78d4
             Scanner sc = new Scanner(System.in);
             int opcion;
             do {
@@ -68,111 +47,27 @@ public class CalculaNominas {
                         System.out.println("Saliendo del programa...");
                         break;
                     case 1:
-                        for (Empleado empleado : empleados){
-                            System.out.println(empleado);
-                        }
+                        mostrarEmpleados(dao);
                         break;
 
                     case 2:
-                        String respuesta;
-                        System.out.print("Dni del empleado que desea ver el salario: ");
-                        respuesta = sc.nextLine();
-                        boolean encontrado = false;
-                        for (Empleado empleado : empleados){
-                            if (empleado.dni.equals(respuesta)){
-                                encontrado = true;
-                                int sueldo = Nomina.sueldo(empleado);
-                                System.out.println("Sueldo: "+sueldo);
-                                break;
-                            }
-                        }
-
-                        if (!encontrado){
-                            System.out.println("Empleado no encontrado");
-                        }
+                        mostrarSueldo(sc, dao);
                         break;
 
                     case 3:
-                        System.out.print("Dni del empleado que desea modificar: ");
-                        String dniModificar = sc.nextLine();
-
-                        Empleado empleadoEncontrado = null;
-
-                        for (Empleado empleado : empleados) {
-                            if (empleado.dni.equals(dniModificar)) {
-                                empleadoEncontrado = empleado;
-                                break;
-                            }
-                        }
-
-                        if (empleadoEncontrado == null) {
-                            System.out.println("Empleado no encontrado");
-                            break;
-                        }
-
-                        int opcionModificar;
-
-                        do {
-                            System.out.println("===== MODIFICAR EMPLEADO =====");
-                            System.out.println("1. Modificar nombre");
-                            System.out.println("2. Modificar DNI");
-                            System.out.println("3. Modificar sexo");
-                            System.out.println("4. Modificar categoría");
-                            System.out.println("5. Modificar años trabajados");
-                            System.out.println("0. Volver");
-                            System.out.println("==============================");
-                            System.out.print("Selecciona una opción: ");
-
-                            opcionModificar = sc.nextInt();
-                            sc.nextLine();
-
-                            switch (opcionModificar) {
-
-                                case 1:
-                                    System.out.println("Introduzca nuevo nombre: ");
-                                    break;
-
-                                case 2:
-                                    System.out.println("Modificar DNI");
-                                    break;
-
-                                case 3:
-                                    System.out.println("Modificar sexo");
-                                    break;
-
-                                case 4:
-                                    System.out.println("Introduzca nueva categoria: ");
-                                    int cambioCategoria = sc.nextInt();
-                                    sc.nextLine();
-                                    empleadoEncontrado.setCategoria(cambioCategoria);
-                                    break;
-
-                                case 5:
-                                    System.out.println("Modificar años trabajados");
-                                    break;
-
-                                case 0:
-                                    System.out.println("Volviendo al menú principal...");
-                                    break;
-
-                                default:
-                                    System.out.println("Opción no válida");
-                            }
-
-                        } while (opcionModificar != 0);
-
+                        modificarEmpleado(sc, dao);
                         break;
 
                     case 4:
-                        System.out.println("Recalcular sueldo de un empleado");
+                        recalcularSueldo(sc, dao);
                         break;
 
                     case 5:
-                        System.out.println("Recalcular sueldos de todos los empleados");
+                        recalcularTodosSueldos(dao);
                         break;
 
                     case 6:
-                        System.out.println("Realizar copia de seguridad");
+                        realizarCopia(dao);
                         break;
 
                     default:
@@ -188,13 +83,130 @@ public class CalculaNominas {
 
         }
 
+    private static void mostrarEmpleados(EmpleadoDAO dao) throws Exception {
 
-    private static void escribe(Empleado e, Empleado e2) {
-        Nomina n = new Nomina();
-        System.out.println(e.toString() + " ,sueldo=" + n.sueldo(e) + "}");
-        System.out.println(e2.toString() + " ,sueldo=" + n.sueldo(e2) + "}");
+        ArrayList<Empleado> empleadosBD = dao.obtenerEmpleados();
+
+        for (Empleado empleado : empleadosBD) {
+            System.out.println(empleado);
+        }
     }
+
+    private static void mostrarSueldo(Scanner sc, EmpleadoDAO dao) throws Exception {
+
+        System.out.print("Dni del empleado que desea ver el salario: ");
+        String respuesta = sc.nextLine();
+
+        int sueldo = dao.obtenerSueldo(respuesta);
+
+        if (sueldo == -1) {
+            System.out.println("Empleado no encontrado");
+        } else {
+            System.out.println("Sueldo: " + sueldo);
+        }
+    }
+
+    private static void modificarEmpleado(Scanner sc, EmpleadoDAO dao) throws Exception {
+
+        System.out.print("Dni del empleado que desea modificar: ");
+        String dni = sc.nextLine();
+
+        Empleado empleadoEncontrado = dao.obtenerEmpleadoPorDni(dni);
+
+        if (empleadoEncontrado == null) {
+            System.out.println("Empleado no encontrado");
+            return;
+        }
+
+        System.out.println("===== MODIFICAR EMPLEADO =====");
+        System.out.println("1. Modificar nombre");
+        System.out.println("2. Modificar DNI");
+        System.out.println("3. Modificar sexo");
+        System.out.println("4. Modificar categoría");
+        System.out.println("5. Modificar años trabajados");
+        System.out.print("Selecciona una opción: ");
+
+        int opcion = sc.nextInt();
+        sc.nextLine();
+
+        switch (opcion) {
+
+            case 1:
+                System.out.print("Nuevo nombre: ");
+                empleadoEncontrado.nombre = sc.nextLine();
+                break;
+
+            case 2:
+                System.out.print("Nuevo DNI: ");
+                empleadoEncontrado.dni = sc.nextLine();
+                break;
+
+            case 3:
+                System.out.print("Nuevo sexo: ");
+                empleadoEncontrado.sexo = sc.nextLine().charAt(0);
+                break;
+
+            case 4:
+                System.out.print("Nueva categoría: ");
+                empleadoEncontrado.setCategoria(sc.nextInt());
+                sc.nextLine();
+                break;
+
+            case 5:
+                System.out.print("Nuevos años trabajados: ");
+                empleadoEncontrado.anyosTrabajados = sc.nextInt();
+                sc.nextLine();
+                break;
+
+            default:
+                System.out.println("Opción no válida");
+                return;
+        }
+
+        dao.actualizarEmpleado(empleadoEncontrado);
+
+        System.out.println("Empleado modificado correctamente");
+    }
+
+    private static void recalcularSueldo(Scanner sc, EmpleadoDAO dao)
+            throws Exception {
+
+        System.out.print("DNI del empleado: ");
+        String dni = sc.nextLine();
+
+        Empleado empleado = dao.obtenerEmpleadoPorDni(dni);
+
+        if (empleado == null) {
+            System.out.println("Empleado no encontrado");
+            return;
+        }
+
+        dao.actualizarNomina(empleado);
+
+        System.out.println("Sueldo recalculado: " + Nomina.sueldo(empleado));
+    }
+
+    private static void recalcularTodosSueldos(EmpleadoDAO dao)
+            throws Exception {
+
+        ArrayList<Empleado> empleados = dao.obtenerEmpleados();
+
+        for (Empleado empleado : empleados) {
+            dao.actualizarNomina(empleado);
+        }
+
+        System.out.println("Sueldos recalculados correctamente");
+    }
+
+    private static void realizarCopia(EmpleadoDAO dao) throws Exception {
+
+        ArrayList<Empleado> empleados = dao.obtenerEmpleados();
+
+        FicherosDAO ficheros = new FicherosDAO();
+
+        ficheros.realizarCopia(empleados, dao);
+
+        System.out.println("Copia realizada correctamente");
+    }
+
 }
-
-
-

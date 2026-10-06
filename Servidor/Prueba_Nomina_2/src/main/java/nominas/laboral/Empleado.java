@@ -32,7 +32,7 @@ public class Empleado extends Persona{
     }
 
     public int getAnyosTrabajados() {
-        return anyosTrabajados++;
+        return anyosTrabajados;
     }
 
     public void incrAnyo (){
