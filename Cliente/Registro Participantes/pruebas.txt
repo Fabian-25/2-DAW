@@ -1,0 +1,54 @@
+Prueba 1:
+
+Datos o acción: Escribir, modificar y pegar un nombre ("Ana", borrar, pegar "Luis")
+Resultado esperado: El saludo se actualiza.
+Resultado obtenido: El párrafo con id="vista" muestra "Hola, Ana" y luego "Hola, Luis" en tiempo real al detectar el evento input.
+
+
+Prueba 2:
+
+Datos o acción: Borrar el nombre o introducir solo espacios.
+Resultado esperado: El saludo queda vacío.
+Resultado obtenido: El método trim() elimina los espacios y el saludo desaparece.
+
+
+Prueba 3:
+
+Datos o acción: Enviar el formulario vacío.
+Resultado esperado: No añade participantes y muestra un error.
+Resultado obtenido: reportValidity() detiene el envío y el navegador muestra el aviso indicando que el campo es obligatorio y no se suma nada al contador.
+
+
+Prueba 4:
+
+Datos o acción: Enviar un nombre de una letra con correo válido .
+Resultado esperado: Muestra el error del nombre y no añade participantes.
+Resultado obtenido: Salta la validación manual (length < 2) y se muestra el mensaje "Nombre: mínimo 2 caracteres.". La lista no cambia.
+
+
+Prueba 5:
+
+Datos o acción: Enviar «Ana» con el correo "ana@"
+Resultado esperado: Rechaza el correo y no añade participantes.
+Resultado obtenido: reportValidity() detecta que el formato del type="email" es inválido y frena la ejecución mostrando el error del navegador.
+
+
+Prueba 6:
+
+Datos o acción: Enviar «Ana» con "ana@example.com".
+Resultado esperado: Añade una fila, actualiza el total y limpia los campos.
+Resultado obtenido: Se crea el <li> en la lista, el total pasa a 1, el formulario se resetea correctamente y el foco vuelve al input del nombre.
+
+
+Prueba 7:
+
+Datos o acción: Registrar otra persona pulsando Enter desde un campo.
+Resultado esperado: Añade una sola fila sin recargar la página.
+Resultado obtenido: preventDefault() evita la recarga de la página, se procesa el evento submit y se añade la nueva persona a la lista.
+
+
+Prueba 8:
+
+Datos o acción: Pulsar «Vaciar lista» dos veces.
+Resultado esperado: La lista queda vacía y el contador permanece en cero.
+Resultado obtenido: replaceChildren() vacía la lista en el primer clic. Al hacer el segundo clic, la lista sigue vacía, no da ningún error y el total se mantiene en 0 mostrando "Lista vacía.".
