@@ -1,33 +1,45 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Participantes</title>
-    <!-- El atributo defer asegura que el HTML cargue antes de ejecutar el JS -->
-    <script src="app.js" defer></script>
-</head>
-<body>
-    <h1>Registro de Taller</h1>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Registro de Participantes</title>
+        <!-- El atributo defer asegura que el HTML cargue antes de ejecutar el JS -->
+        <script src="app.js" defer></script>
+    </head>
+    <body>
+        <h1>Registro de Taller</h1>
 
-    <form id="registro" novalidate>
+        <form id="registro" novalidate>
+            <div>
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" required><br><br>
+            </div>
+            <div>
+                <label for="email">Correo electrónico:</label>
+                <input type="email" id="email" required><br><br>
+            </div>
+
+            <button type="submit">Registrar</button>
+            <button type="button" id="vaciar">Vaciar lista</button>
+        </form>
+
+        <p id="vista"></p>
+        <p id="mensaje"></p>
+
+        <h2>Participantes (<span id="total">0</span>)</h2>
+
+        <!-- Buscador de participantes -->
         <div>
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" required><br><br>
+            <label for="buscar">Buscar participantes:</label>
+            <input type="search" id="buscar">
         </div>
-        <div>
-            <label for="email">Correo electrónico:</label>
-            <input type="email" id="email" required><br><br>
-        </div>
-        
-        <button type="submit">Registrar</button>
-        <button type="button" id="vaciar">Vaciar lista</button>
-    </form>
 
-    <p id="vista"></p>
-    <p id="mensaje"></p>
+        <!-- Aviso de resultados -->
+        <p id="avisoLista" aria-live="polite"></p>
 
-    <h2>Participantes (<span id="total">0</span>)</h2>
-    <ul id="lista"></ul>
-</body>
+        <!-- Lista de participantes -->
+        <ul id="lista"></ul>
+
+    </body>
 </html>

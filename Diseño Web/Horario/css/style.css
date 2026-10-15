@@ -1,6 +1,6 @@
         body{
             font-family: Arial, sans-serif;
-            background-image: url("./Images/hallowen_1920x1080.jpg");
+            background-image: url("/Horario/Images/hallowen_1920x1080.jpg");
             background-repeat: no-repeat;
             background-position: center;
             background-attachment: fixed;
@@ -31,4 +31,21 @@
         .recreo{
             background-color: rgb(189, 189, 189);
             font-weight: bold;
+        }
+
+        .imagen {
+            width: 20px;           
+            height: 20px;          
+            overflow: hidden;       
+        }
+
+        .imagen img {
+            width: 15%;
+            height: 15%;
+            object-fit: cover;      
+            transition: transform 0.5s ease; 
+        }
+
+        .imagen img:hover {
+            transform: scale(1.2);  
         }

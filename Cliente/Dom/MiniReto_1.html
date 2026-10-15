@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="encabezado">Taller ed Juani</h1>
+    <ul id="lista">
+        <li>Lucia</li>
+        <li>Juani</li>
+        <li>Martin</li>
+        <li>Julio</li>
+    </ul>
+
+    <script>
+        const titulo = document.querySelector("#encabezado");
+        titulo.textContent = "Taller de Java Script"
+
+        const nuevoItem = document.createElement("li");
+        nuevoItem.textContent = "Fabian"
+        const lista = document.querySelector("#lista");
+        lista.append(nuevoItem);
+    </script>
+</body>
+</html>
