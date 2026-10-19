@@ -46,3 +46,8 @@
 0:0:0:0:0:0:0:1 - - [16/Oct/2026:10:46:32 +0200] "GET /crudweb/productos?opcion=crear HTTP/1.1" 200 596
 0:0:0:0:0:0:0:1 - - [16/Oct/2026:10:46:40 +0200] "POST /crudweb/productos HTTP/1.1" 302 -
 0:0:0:0:0:0:0:1 - - [16/Oct/2026:10:46:40 +0200] "GET /crudweb/productos?opcion=listar HTTP/1.1" 200 1491
+0:0:0:0:0:0:0:1 - - [16/Oct/2026:10:54:28 +0200] "GET /crudweb/productos?opcion=listar HTTP/1.1" 200 356
+0:0:0:0:0:0:0:1 - - [16/Oct/2026:10:54:32 +0200] "GET /crudweb/productos?opcion=crear HTTP/1.1" 200 644
+0:0:0:0:0:0:0:1 - - [16/Oct/2026:10:54:38 +0200] "POST /crudweb/productos HTTP/1.1" 200 342
+0:0:0:0:0:0:0:1 - - [16/Oct/2026:10:54:40 +0200] "GET /crudweb/productos?opcion=listar HTTP/1.1" 200 711
+0:0:0:0:0:0:0:1 - - [16/Oct/2026:10:54:43 +0200] "GET /crudweb/productos?opcion=meditar&id=1 HTTP/1.1" 200 732
