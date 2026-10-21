@@ -1,0 +1,24 @@
+body{
+    font-family: Arial, sans-serif;
+}
+
+#cabecera{
+    border: 1px black solid;
+}
+
+#cabecera h1{
+    border: 1px black solid;
+    border-radius: 25%;
+}
+
+#cabecera h2{
+    border: 1px black solid;
+}
+
+#menu{
+    border: 1px black solid;
+}
+
+#contenido{
+    border: 1px black solid;
+}
