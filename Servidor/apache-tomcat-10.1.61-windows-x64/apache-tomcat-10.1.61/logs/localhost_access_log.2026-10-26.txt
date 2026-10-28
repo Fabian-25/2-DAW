@@ -79,3 +79,9 @@
 0:0:0:0:0:0:0:1 - - [26/Oct/2026:14:10:48 +0100] "POST /empresa/empleados/editar HTTP/1.1" 302 -
 0:0:0:0:0:0:0:1 - - [26/Oct/2026:14:10:48 +0100] "GET /empresa/empleados?actualizado=true HTTP/1.1" 200 5741
 0:0:0:0:0:0:0:1 - - [26/Oct/2026:14:17:25 +0100] "GET /empresa/empleados?actualizado=true HTTP/1.1" 200 6380
+0:0:0:0:0:0:0:1 - - [26/Oct/2026:14:20:00 +0100] "GET /empresa/empleados?actualizado=true HTTP/1.1" 200 6466
+0:0:0:0:0:0:0:1 - - [26/Oct/2026:14:25:51 +0100] "GET /empresa/ HTTP/1.1" 200 4094
+0:0:0:0:0:0:0:1 - - [26/Oct/2026:14:26:04 +0100] "GET /empresa/empleados HTTP/1.1" 200 6466
+0:0:0:0:0:0:0:1 - - [26/Oct/2026:14:26:06 +0100] "GET /empresa/empleados/crear HTTP/1.1" 200 4176
+0:0:0:0:0:0:0:1 - - [26/Oct/2026:14:26:07 +0100] "GET /empresa/empleados HTTP/1.1" 200 6466
+0:0:0:0:0:0:0:1 - - [26/Oct/2026:14:26:08 +0100] "GET /empresa/ HTTP/1.1" 200 4094
