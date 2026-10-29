@@ -219,4 +219,97 @@ public class EmpleadoDAO {
 
         return empleado;
     }
+
+    /**
+     * Busca empleados utilizando uno o varios criterios.
+     * Los campos vacíos no se tienen en cuenta.
+     *
+     * @param nombre nombre o parte del nombre
+     * @param dni DNI completo o parcial
+     * @param sexo sexo del empleado
+     * @param categoria categoría o null
+     * @param anyosTrabajados años trabajados o null
+     * @return lista de empleados encontrados
+     * @throws SQLException si ocurre un error en la base de datos
+     */
+    public List<Empleado> buscarEmpleados(
+            String nombre,
+            String dni,
+            String sexo,
+            Integer categoria,
+            Integer anyosTrabajados) throws SQLException {
+
+        List<Empleado> empleados = new ArrayList<>();
+
+        StringBuilder sql = new StringBuilder(
+                "SELECT e.nombre, e.dni, e.sexo, e.categoria, " +
+                        "e.anyos_trabajados, n.sueldo " +
+                        "FROM empleados e " +
+                        "LEFT JOIN nominas n ON e.dni = n.dni " +
+                        "WHERE 1 = 1"
+        );
+
+        if (nombre != null && !nombre.isBlank()) {
+            sql.append(" AND e.nombre LIKE ?");
+        }
+
+        if (dni != null && !dni.isBlank()) {
+            sql.append(" AND e.dni LIKE ?");
+        }
+
+        if (sexo != null && !sexo.isBlank()) {
+            sql.append(" AND e.sexo = ?");
+        }
+
+        if (categoria != null) {
+            sql.append(" AND e.categoria = ?");
+        }
+
+        if (anyosTrabajados != null) {
+            sql.append(" AND e.anyos_trabajados = ?");
+        }
+
+        sql.append(" ORDER BY e.nombre ASC");
+
+        try (Connection conexion = ConexionDB.conectar();
+             PreparedStatement sentencia =
+                     conexion.prepareStatement(sql.toString())) {
+
+            int posicion = 1;
+
+            if (nombre != null && !nombre.isBlank()) {
+                sentencia.setString(
+                        posicion++,
+                        "%" + nombre.trim() + "%"
+                );
+            }
+
+            if (dni != null && !dni.isBlank()) {
+                sentencia.setString(
+                        posicion++,
+                        "%" + dni.trim() + "%"
+                );
+            }
+
+            if (sexo != null && !sexo.isBlank()) {
+                sentencia.setString(posicion++, sexo);
+            }
+
+            if (categoria != null) {
+                sentencia.setInt(posicion++, categoria);
+            }
+
+            if (anyosTrabajados != null) {
+                sentencia.setInt(posicion++, anyosTrabajados);
+            }
+
+            try (ResultSet resultado = sentencia.executeQuery()) {
+                while (resultado.next()) {
+                    empleados.add(leerEmpleado(resultado));
+                }
+            }
+        }
+
+        return empleados;
+    }
 }

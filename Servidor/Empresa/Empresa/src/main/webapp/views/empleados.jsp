@@ -1,6 +1,7 @@
 
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -173,6 +174,7 @@
                     .boton-eliminar:hover {
                         background-color: #b91c1c;
                     }
+
     </style>
 </head>
 
@@ -186,6 +188,7 @@
     <section class="encabezado">
         <div>
             <h1>Listado de empleados</h1>
+
             <p class="descripcion">
                 Consulta los datos de los trabajadores y sus nóminas.
             </p>
@@ -236,7 +239,10 @@
                                 años
                             </td>
                             <td class="sueldo">
-                                <c:out value="${empleado.sueldo / 100.0}"/> €
+                                <fmt:formatNumber
+                                    value="${empleado.sueldo / 100.0}"
+                                    minFractionDigits="2"
+                                    maxFractionDigits="2"/> €
                             </td>
 
 <td>

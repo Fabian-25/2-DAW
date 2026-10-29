@@ -157,6 +157,30 @@
         </div>
 
         <div class="tarjeta">
+            <h3>Consultar salario</h3>
+            <p>
+                Busca a un empleado por su DNI y consulta
+                el sueldo que tiene registrado en la base de datos.
+            </p>
+            <a class="boton"
+               href="${pageContext.request.contextPath}/consulta-salario">
+                Consultar salario
+            </a>
+        </div>
+
+        <div class="tarjeta">
+            <h3>Buscar empleados</h3>
+            <p>
+                Encuentra empleados utilizando su nombre,
+                DNI, sexo, categoría o años trabajados.
+            </p>
+            <a class="boton"
+               href="${pageContext.request.contextPath}/buscar-empleados">
+                Buscar empleados
+            </a>
+        </div>
+
+        <div class="tarjeta">
             <h3>Crear empleado</h3>
             <p>
                 Registra un nuevo empleado y calcula
